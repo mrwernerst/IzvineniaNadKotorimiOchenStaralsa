@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Письмо</title>
+<link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#fdeedd;--bg2:#f2b8c6;--ink:#4a2433;--rose:#c93c68;--gold:#b9852f;--paper:#fffaf2;--paper2:#fbeedd;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#3a1626;--bg2:#1f0b15}}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(circle at 30% 20%,var(--bg1),var(--bg2));font-family:'Caveat','Comic Sans MS',cursive;color:var(--ink);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.bg i{position:absolute;bottom:-40px;color:var(--rose);opacity:.35;animation:up linear infinite;font-style:normal}
+@keyframes up{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+.gear{position:absolute;color:var(--gold);opacity:.5;animation:spin linear infinite}
+.gear.r{animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.book{perspective:1400px;width:min(80vw,310px);height:min(62vh,450px);position:relative;z-index:2;margin-bottom:40px}
+.book::before{content:"";position:absolute;inset:7px -8px -8px 5px;border-radius:4px 14px 14px 4px;background:repeating-linear-gradient(90deg,#fffaf2 0 2px,#e2cba8 2px 3px);box-shadow:0 18px 40px #4a243366}
+.leaf,.cover{position:absolute;inset:0;border-radius:3px 12px 12px 3px;transform-origin:left center;backface-visibility:hidden}
+.leaf{background:linear-gradient(90deg,#c9a46a44 0,#c9a46a00 22px),linear-gradient(135deg,var(--paper),var(--paper2));padding:24px 18px 30px 30px;overflow-y:auto;border:1px solid #e6cfa6;transition:transform 1.1s cubic-bezier(.6,.05,.2,1),opacity .5s .6s;cursor:pointer}
+.leaf.turned{transform:rotateY(-110deg);opacity:0;pointer-events:none}
+.leaf h1{font-family:'Marck Script',cursive;font-weight:400;font-size:2.1rem;color:var(--rose);margin:0 0 12px;text-align:center}
+.leaf p{font-size:1.35rem;line-height:1.3;margin:0 0 12px;font-weight:500}
+.flower{text-align:center;margin-top:16px}.flower svg{width:130px;height:auto}.dr{stroke-dasharray:1;stroke-dashoffset:1}.l.show .dr{animation:draw 2.4s ease forwards}@keyframes draw{to{stroke-dashoffset:0}}
+.pn{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:1rem;color:var(--gold)}
+.l{opacity:0;transform:translateY(14px);transition:opacity 1s,transform 1s}
+.l.show{opacity:1;transform:none}
+.big{font-family:'Marck Script',cursive;font-size:2.3rem!important;color:var(--rose);text-align:center;margin:22px 0 6px!important;line-height:1.15!important}
+.cover{z-index:30;transition:transform 1.8s cubic-bezier(.6,.05,.2,1),opacity .6s 1.3s;background:linear-gradient(90deg,#4d0f26 0,#4d0f26 14px,#7a1c41 15px,#a82a55 40%,#8a2048);box-shadow:0 10px 30px #0004;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;border:3px solid #d9a95a;color:#fff;overflow:hidden}
+.cover::after{content:"";position:absolute;top:0;right:26px;width:18px;height:64px;background:#e8c27a;clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%)}
+.cover.open{transform:rotateY(-125deg);opacity:0;pointer-events:none}
+.cover h2{font-family:'Marck Script',cursive;font-weight:400;font-size:2.4rem;margin:0;color:#f6dca0}
+.cover small{font-size:1.4rem;animation:pulse 1.6s ease-in-out infinite}
+.seal{font-size:4rem;animation:beat 1.2s ease-in-out infinite;filter:drop-shadow(0 4px 6px #0003)}
+@keyframes beat{50%{transform:scale(1.15)}}
+@keyframes pulse{50%{opacity:.5}}
+.cg{position:absolute;color:#e8c27a;opacity:.55;animation:spin linear infinite}
+.nav{position:absolute;left:0;right:0;bottom:-52px;display:flex;justify-content:center;gap:40px;opacity:0;transition:opacity 1s 1.5s;z-index:40}
+.nav.on{opacity:1}
+.nav button{background:var(--rose);color:#fff;border:0;border-radius:50%;width:42px;height:42px;font-size:1.4rem;cursor:pointer;box-shadow:0 4px 10px #4a243355;font-family:inherit}
+.nav button:disabled{opacity:.3}
+.pop{position:fixed;z-index:50;pointer-events:none;color:var(--rose);animation:pop 2s ease-out forwards}
+@keyframes pop{from{transform:translate(0,0) scale(.4);opacity:1}to{transform:translate(var(--x),var(--y)) scale(1.3) rotate(40deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.bg i,.gear,.cg,.seal{animation:none}.cover{transition:opacity .6s}.cover.open{transform:none}.dr{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="book" id="book">
+  <div class="leaf"><h1 class="l">Мне очень жаль…</h1>
+    <p class="l">Я пишу это не для того, чтобы оправдаться. Оправданий здесь нет.</p>
+    <p class="l">Я рассказал другому человеку то, что было сказано только между нами, а потом, когда ты спросила, сделал вид, что не понимаю, о чём речь. Это была ложь, и она ранила не меньше самого поступка.</p><span class="pn">1</span></div>
+  <div class="leaf"><p class="l">Ты права: дело не в содержании, а в доверии. Оно ломается за одну секунду, а чинится долго, по маленькой шестерёнке за раз. Я это понял только сейчас.</p><div class="l flower" data-p="8"></div><span class="pn">2</span></div>
+  <div class="leaf"><p class="l">Мне стыдно, и я искренне раскаиваюсь. Я больше не буду передавать никому ничего личного из нашего общения и буду говорить тебе правду сразу, даже если неловко.</p><div class="l flower" data-p="5"></div><span class="pn">3</span></div>
+  <div class="leaf"><p class="l">Я не прошу простить меня сегодня. Ты вправе злиться, сколько нужно. Просто знай: ты мне дорога.</p>
+    <p class="l big">Прости меня, Нюра ♥</p><span class="pn">4</span></div>
+  <div class="cover" id="cover"><div class="seal">❤</div><h2>Для тебя</h2><small>коснись, чтобы открыть</small></div>
+  <div class="nav" id="nav"><button id="prev" aria-label="Назад">‹</button><button id="next" aria-label="Дальше">›</button></div>
+</div>
+<script>
+function gear(size,teeth,fill){
+  var R=size/2,r=R*.78,pts=[],n=teeth*4;
+  for(var i=0;i<n;i++){var a=i/n*Math.PI*2,k=(i%4<2)?R:r;pts.push((R+Math.cos(a)*k).toFixed(1)+','+(R+Math.sin(a)*k).toFixed(1));}
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'"><polygon points="'+pts.join(' ')+'" fill="currentColor"/><circle cx="'+R+'" cy="'+R+'" r="'+R*.32+'" fill="'+fill+'"/></svg>';
+}
+var bg=document.getElementById('bg');
+for(var i=0;i<18;i++){var h=document.createElement('i');h.textContent='❤';h.style.left=Math.random()*100+'%';h.style.fontSize=(12+Math.random()*22)+'px';h.style.animationDuration=(7+Math.random()*8)+'s';h.style.animationDelay=(-Math.random()*12)+'s';bg.appendChild(h);}
+[[4,8,70,9,0],[80,6,46,6,1],[8,72,56,7,1],[78,78,84,11,0],[44,90,36,5,1]].forEach(function(s){var g=document.createElement('div');g.className='gear'+(s[4]?' r':'');g.style.left=s[0]+'%';g.style.top=s[1]+'%';g.style.animationDuration=s[3]*2+'s';g.innerHTML=gear(s[2],10,'#ffe3ec');bg.appendChild(g);});
+document.querySelectorAll('.flower').forEach(function(el){var n=+el.dataset.p,col=n==8?'#c93c68':'#d0763c',d=0,s='<svg viewBox="0 0 120 150" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6">';
+function P(path,c,x){d+=.4;s+='<path class="dr" pathLength="1" d="'+path+'" stroke="'+c+'" style="animation-delay:'+d+'s"'+(x||'')+'/>';}
+P('M60 146 C56 122 66 100 60 70','#5f8a4f');P('M60 118 C42 116 32 104 30 94 C46 94 56 104 60 118','#5f8a4f');P('M62 100 C78 98 88 88 90 78 C74 78 64 88 62 100','#5f8a4f');
+for(var k=0;k<n;k++)P('M60 60 C49 47 51 30 60 28 C69 30 71 47 60 60',col,' transform="rotate('+(k*360/n)+' 60 60)"');
+P('M54 60 a6 6 0 1 0 12 0 a6 6 0 1 0 -12 0','#e8a93c');el.innerHTML=s+'</svg>';});
+var cover=document.getElementById('cover');
+[[10,6,46,0],[68,78,60,1],[14,80,30,1]].forEach(function(s){var g=document.createElement('div');g.className='cg';g.style.left=s[0]+'%';g.style.top=s[1]+'%';g.style.animationDuration='14s';if(s[3])g.style.animationDirection='reverse';g.innerHTML=gear(s[2],9,'#8a2048');cover.appendChild(g);});
+var leaves=[].slice.call(document.querySelectorAll('.leaf')),idx=0,prev=document.getElementById('prev'),next=document.getElementById('next'),started=false;
+leaves.forEach(function(l,i){l.style.zIndex=20-i;});
+function reveal(i){leaves[i].querySelectorAll('.l:not(.show)').forEach(function(el,k){setTimeout(function(){el.classList.add('show')},300+k*1100);});}
+function upd(){prev.disabled=idx===0;next.disabled=idx===leaves.length-1;}
+function go(d){if(!started)return;var n=idx+d;if(n<0||n>=leaves.length)return;if(d>0)leaves[idx].classList.add('turned');else leaves[n].classList.remove('turned');idx=n;upd();reveal(idx);}
+prev.onclick=function(){go(-1)};next.onclick=function(){go(1)};
+leaves.forEach(function(l){l.addEventListener('click',function(){go(1)});});
+var sx=null;document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',function(e){if(sx===null)return;var d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)go(d<0?1:-1);sx=null});
+cover.addEventListener('click',function(){
+  if(started)return;started=true;cover.classList.add('open');upd();
+  document.getElementById('nav').classList.add('on');
+  for(var i=0;i<16;i++){var p=document.createElement('div');p.className='pop';p.textContent='❤';p.style.left='50%';p.style.top='50%';p.style.fontSize=(14+Math.random()*20)+'px';p.style.setProperty('--x',(Math.random()*340-170)+'px');p.style.setProperty('--y',(-60-Math.random()*280)+'px');p.style.animationDelay=(Math.random()*.6)+'s';document.body.appendChild(p);setTimeout(function(e){e.remove()},3000,p);}
+  setTimeout(function(){reveal(0)},900);
+});
+</script>
+</body>
+</html>
